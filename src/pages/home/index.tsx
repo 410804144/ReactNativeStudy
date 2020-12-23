@@ -9,11 +9,16 @@ export default function Home({navigation}:StackScreenProps<any>) {
     {
       title: 'CodePush',
       desc: '热更新',
-      url: '',
+      url: 'CodePushDemo',
     },
     {
       title: 'Package',
       desc: 'Android和iOS打包',
+      url: '',
+    },
+    {
+      title: 'Env',
+      desc: process.env.NODE_ENV,
       url: '',
     }
   ]
