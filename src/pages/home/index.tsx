@@ -1,11 +1,18 @@
-import React from 'react'
-import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {Image, NativeModules, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import Assets from '@/assets'
 import Color from '@/constants/color'
 import {StackScreenProps} from '@react-navigation/stack'
 
+interface IData {
+  title: string,
+  desc: string,
+  url: string
+}
+
 export default function Home({navigation}:StackScreenProps<any>) {
-  const dataList = [
+
+  const [dataList, setDataList] = useState<IData[]>([
     {
       title: 'CodePush',
       desc: '热更新',
@@ -18,10 +25,39 @@ export default function Home({navigation}:StackScreenProps<any>) {
     },
     {
       title: 'Env',
-      desc: process.env.NODE_ENV,
+      desc: process.env.NODE_ENV + '',
       url: '',
-    }
-  ]
+    }])
+
+  useEffect(() => {
+    initVersion()
+  }, [])
+
+  /** 初始化版本信息 */
+  const initVersion = () => {
+    NativeModules.AppVersion.getAppVersion((version: string) => {
+      console.log(version)
+      setDataList(dataList => {
+        console.log(dataList)
+        dataList.push({
+          title: 'Version',
+          desc: version,
+          url: ''
+        })
+        return dataList.slice()
+      })
+    }, (code: number, desc: string) =>{
+      console.log(code, desc)
+      setDataList(dataList => {
+        dataList.push({
+          title: 'Version',
+          desc: '未知',
+          url: ''
+        })
+        return dataList.slice()
+      })
+    })
+  }
 
   /** item点击事件 */
   const handleClick = (item: any) => {
