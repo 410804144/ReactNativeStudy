@@ -28,17 +28,17 @@ public class VersionModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getAppVersion(Callback successCallback, Callback failureCallback) {
+  public void getAppVersion(Callback successCallback, Callback errorCallback) {
     try {
       PackageInfo info = getPackageInfo();
       if (null != info) {
         successCallback.invoke(info.versionName);
       } else {
-        failureCallback.invoke(-1, "获取版本号失败");
+        errorCallback.invoke(-1, "获取版本号失败");
       }
     } catch (Exception e) {
       e.printStackTrace();
-      failureCallback.invoke(-2, "获取版本号失败");
+      errorCallback.invoke(-2, "获取版本号失败");
     }
   }
 

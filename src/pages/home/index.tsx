@@ -27,7 +27,13 @@ export default function Home({navigation}:StackScreenProps<any>) {
       title: 'Env',
       desc: process.env.NODE_ENV + '',
       url: '',
-    }])
+    },
+    {
+      title: 'React Module',
+      desc: '原生代码交互',
+      url: 'ReactModuleDemo',
+    },
+  ])
 
   useEffect(() => {
     initVersion()

@@ -11,9 +11,8 @@ function App() {
 const codePushOptions = {
   checkFrequency: CodePush.CheckFrequency.MANUAL
 }
-const exportApp = process.env.NODE_ENV === 'development' ? App : CodePush(codePushOptions)(Pages)
 
-export default exportApp
+export default CodePush(codePushOptions)(App)
 
 
 
