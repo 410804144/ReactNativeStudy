@@ -42,9 +42,7 @@ export default function Home({navigation}:StackScreenProps<any>) {
   /** 初始化版本信息 */
   const initVersion = () => {
     NativeModules.AppVersion.getAppVersion((version: string) => {
-      console.log(version)
       setDataList(dataList => {
-        console.log(dataList)
         dataList.push({
           title: 'Version',
           desc: version,
@@ -53,7 +51,7 @@ export default function Home({navigation}:StackScreenProps<any>) {
         return dataList.slice()
       })
     }, (code: number, desc: string) =>{
-      console.log(code, desc)
+      console.error(code, desc)
       setDataList(dataList => {
         dataList.push({
           title: 'Version',

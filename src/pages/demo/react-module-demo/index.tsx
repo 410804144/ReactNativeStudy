@@ -26,7 +26,6 @@ export default function ReactModuleDemo() {
     NativeModules.Test.testCallback(text, (msg: string) => {
       setMsg(msg)
     }, (code: number, msg: number) => {
-      console.log(code, msg)
       setMsg(code.toString() + ':' + msg)
     })
   }
