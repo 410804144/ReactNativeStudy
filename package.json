@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "del-cli ./android/app/build && run-p start android",
+    "dev": "run-s clean && run-p start android",
+    "clean": "del-cli ./android/app/build",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
