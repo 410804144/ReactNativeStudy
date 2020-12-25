@@ -4,16 +4,18 @@ import {createStackNavigator} from '@react-navigation/stack'
 import Home from '@/pages/home'
 import CodePushDemo from '@/pages/demo/code-push-demo'
 import ReactModuleDemo from '@/pages/demo/react-module-demo'
+import {useTranslation} from 'react-i18next'
 
 export default function Pages() {
+  const {t} = useTranslation()
   const Stack = createStackNavigator()
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={'Home'}>
-        <Stack.Screen name={'Home'} component={Home} options={{title: '首页'}}/>
-        <Stack.Screen name={'CodePushDemo'} component={CodePushDemo} options={{title: 'Code Push'}} />
-        <Stack.Screen name={'ReactModuleDemo'} component={ReactModuleDemo} options={{title: 'React Module'}} />
+        <Stack.Screen name={'Home'} component={Home} options={{title: t('首页')}}/>
+        <Stack.Screen name={'CodePushDemo'} component={CodePushDemo} options={{title: t('热更新')}} />
+        <Stack.Screen name={'ReactModuleDemo'} component={ReactModuleDemo} options={{title: t('原生模块')}} />
       </Stack.Navigator>
     </NavigationContainer>
   )

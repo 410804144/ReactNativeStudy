@@ -44,13 +44,13 @@ export default function ReactModuleDemo() {
   return (
     <View style={styles.container}>
       <View style={styles.view}>
-        <TextInput style={styles.input} placeholder={'输入内容'} value={text} onChange={handleChange} />
+        <TextInput style={styles.input} placeholder={'Enter content'} value={text} onChange={handleChange} />
       </View>
       <View style={styles.view}>
-        <Button title={'调用Callback'} onPress={handleCallback} />
+        <Button title={'Callback'} onPress={handleCallback} />
       </View>
       <View style={styles.view}>
-        <Button title={'调用Promise'} onPress={handlePromise} />
+        <Button title={'Promise'} onPress={handlePromise} />
       </View>
       <View style={styles.view}>
         <Text>{msg}</Text>

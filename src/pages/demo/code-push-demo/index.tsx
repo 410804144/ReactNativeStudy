@@ -10,18 +10,19 @@ export default function CodePushDemo() {
 
   /** 检查更新事件 */
   const handleCheckUpdate = () => {
+    setMsg('Check update.')
     CodePush.checkForUpdate().then((res) => {
       if (res) {
         setMsg(JSON.stringify(res))
       } else {
-        setMsg('当前已经是最新版本.')
+        setMsg('App up to date.')
       }
     })
   }
 
   /** 更新事件 */
   const handleUpdate = () => {
-    setMsg('start check update')
+    setMsg('Update.')
     CodePush.sync(
       {},
       codePushStatusDidChange,
@@ -68,10 +69,10 @@ export default function CodePushDemo() {
   return (
     <View style={styles.container}>
       <View style={styles.button}>
-        <Button title={'检查是否有更新内容'} onPress={handleCheckUpdate} />
+        <Button title={'Check Update'} onPress={handleCheckUpdate} />
       </View>
       <View style={styles.button}>
-        <Button title={'更新'} onPress={handleUpdate} />
+        <Button title={'Update App'} onPress={handleUpdate} />
       </View>
       <ScrollView style={styles.scroll}>
         <Text>{msg}</Text>
