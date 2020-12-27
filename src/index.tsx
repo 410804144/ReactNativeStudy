@@ -3,7 +3,7 @@ import Pages from '@/pages'
 import CodePush from 'react-native-code-push'
 import {initI18n} from '@/i18n'
 
-initI18n().then()
+initI18n()
 
 function App() {
   return (

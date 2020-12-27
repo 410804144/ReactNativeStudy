@@ -4,41 +4,73 @@ import Assets from '@/assets'
 import Color from '@/constants/color'
 import {StackScreenProps} from '@react-navigation/stack'
 import {useTranslation} from 'react-i18next'
+import {getLanguageItem} from '@/i18n'
+import LanguageModal from '@/pages/home/language-modal'
+import i18next from 'i18next'
 
 interface IData {
+  /** 名称 */
+  name: string,
+  /** 标题 */
   title: string,
+  /** 描述 */
   desc: string,
-  url: string
+  /** 跳转地址 */
+  url: string,
+  /** 是否显示右箭头 */
+  showArrow: boolean,
 }
 
 export default function Home({navigation}:StackScreenProps<any>) {
   const {t} = useTranslation()
-  const [dataList, setDataList] = useState<IData[]>([
-    {
-      title: t('热更新'),
-      desc: 'Code Push',
-      url: 'CodePushDemo',
-    },
-    {
-      title: t('打包'),
-      desc: 'Android',
-      url: '',
-    },
-    {
-      title: t('环境'),
-      desc: process.env.NODE_ENV + '',
-      url: '',
-    },
-    {
-      title: t('原生模块'),
-      desc: 'Android',
-      url: 'ReactModuleDemo',
-    },
-  ])
+  const [languageVisible, setLanguageVisible] = useState<boolean>(false)
+  const [dataList, setDataList] = useState<IData[]>([])
 
   useEffect(() => {
+    initData()
     initVersion()
-  }, [])
+  }, [i18next.language])
+
+  /** 初始化数据 */
+  const initData = () => {
+    setDataList([
+      {
+        name: 'CodePush',
+        title: t('热更新'),
+        desc: 'Code Push',
+        url: 'CodePushDemo',
+        showArrow: true,
+      },
+      {
+        name: 'Package',
+        title: t('打包'),
+        desc: 'Android',
+        url: '',
+        showArrow: false,
+      },
+      {
+        name: 'Env',
+        title: t('环境'),
+        desc: process.env.NODE_ENV + '',
+        url: '',
+        showArrow: false,
+      },
+      {
+        name: 'Module',
+        title: t('原生模块'),
+        desc: 'Android',
+        url: 'ReactModuleDemo',
+        showArrow: true,
+      },
+      {
+        name: 'Language',
+        title: t('多语言'),
+        desc: getLanguageItem()?.text || '',
+        url: '',
+        showArrow: true,
+      },
+    ])
+  }
 
   /** 初始化版本信息 */
   const initVersion = () => {
@@ -54,9 +86,11 @@ export default function Home({navigation}:StackScreenProps<any>) {
   const setVersion = (version: string) => {
     setDataList(dataList => {
       dataList.push({
+        name: 'Version',
         title: t('版本号'),
         desc: version,
-        url: ''
+        url: '',
+        showArrow: false,
       })
       return dataList.slice()
     })
@@ -64,8 +98,10 @@ export default function Home({navigation}:StackScreenProps<any>) {
 
   /** item点击事件 */
   const handleClick = (item: any) => {
-    const {url} = item
-    if (url) {
+    const {name, url} = item
+    if (name === 'Language') {
+      setLanguageVisible(true)
+    } else if (url) {
       navigation.navigate(url)
     }
   }
@@ -78,12 +114,15 @@ export default function Home({navigation}:StackScreenProps<any>) {
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.desc}>{item.desc}</Text>
             <View style={styles.imageWrapper}>
-              {!!item.url && <Image style={styles.image} source={Assets.rightArrow} />}
+              {item.showArrow && <Image style={styles.image} source={Assets.rightArrow} />}
             </View>
           </View>
         </TouchableOpacity>
-      ))
-      }
+      ))}
+      <LanguageModal
+        visible={languageVisible}
+        onClose={() => setLanguageVisible(false)}
+      />
     </ScrollView>
   )
 }

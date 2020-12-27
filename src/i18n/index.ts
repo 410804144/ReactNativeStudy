@@ -1,4 +1,4 @@
-import i18n from 'i18next'
+import i18next from 'i18next'
 import {initReactI18next} from 'react-i18next'
 import enUs from './locales/en-us'
 import zhTw from './locales/zh-tw'
@@ -12,9 +12,36 @@ export enum LANGUAGE {
   zh_TW = 'zh_TW',
 }
 
+export interface ILanguage {
+  /** 语言名称 */
+  name: LANGUAGE
+  /** 内容 */
+  text: string
+}
+
+/** 获取所有语言 */
+export function getLanguageList(): ILanguage[] {
+  return [
+    {
+      name: LANGUAGE.zh_CN,
+      text: '简体中文',
+    },
+    {
+      name: LANGUAGE.zh_TW,
+      text: '繁體中文',
+    },
+    {
+      name: LANGUAGE.en_US,
+      text: 'English',
+    }
+  ]
+}
+
+
+
 /** 初始化国际化数据 */
 export function initI18n() {
-  return i18n.use(initReactI18next)
+  i18next.use(initReactI18next)
     .init({
       resources: {
         [LANGUAGE.en_US]: {
@@ -30,9 +57,15 @@ export function initI18n() {
         escapeValue: false,
       },
     })
+    .then()
 }
 
 /** 更改国际化语言 */
-export function changeLang(lang: LANGUAGE) {
-  i18n.changeLanguage(lang).then()
+export function changeLanguage(lang: LANGUAGE) {
+  i18next.changeLanguage(lang).then()
+}
+
+/** 获取当前语言 */
+export function getLanguageItem(): ILanguage | undefined {
+  return getLanguageList().find(item => item.name.toString() === i18next.language)
 }

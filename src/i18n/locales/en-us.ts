@@ -6,4 +6,7 @@ export default {
   '环境': 'Env',
   '版本号': 'Version',
   '未知': 'Unknown',
+  '欢迎': 'Welcome',
+  '切换语言': 'Change Language',
+  '多语言': 'Language',
 }
