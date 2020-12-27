@@ -69,6 +69,13 @@ export default function Home({navigation}:StackScreenProps<any>) {
         url: '',
         showArrow: true,
       },
+      {
+        name: 'AppState',
+        title: t('应用程序状态'),
+        desc: '',
+        url: 'AppStateDemo',
+        showArrow: true,
+      },
     ])
   }
 

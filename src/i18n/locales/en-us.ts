@@ -9,4 +9,5 @@ export default {
   '欢迎': 'Welcome',
   '切换语言': 'Change Language',
   '多语言': 'Language',
+  '应用程序状态': 'App State',
 }

@@ -6,6 +6,7 @@ import CodePushDemo from '@/pages/demo/code-push-demo'
 import ReactModuleDemo from '@/pages/demo/react-module-demo'
 import {useTranslation} from 'react-i18next'
 import Welcome from '@/pages/welcome'
+import AppStateDemo from '@/pages/demo/app-state-demo'
 
 export default function Pages() {
   const {t} = useTranslation()
@@ -18,6 +19,7 @@ export default function Pages() {
         <Stack.Screen name={'Home'} component={Home} options={{title: t('首页')}}/>
         <Stack.Screen name={'CodePushDemo'} component={CodePushDemo} options={{title: t('热更新')}} />
         <Stack.Screen name={'ReactModuleDemo'} component={ReactModuleDemo} options={{title: t('原生模块')}} />
+        <Stack.Screen name={'AppStateDemo'} component={AppStateDemo} options={{title: t('应用程序状态')}} />
       </Stack.Navigator>
     </NavigationContainer>
   )

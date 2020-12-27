@@ -27,6 +27,7 @@ export default function Welcome({navigation}: StackScreenProps<any>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.background,
     justifyContent: 'center',
     alignItems: 'center',
   },
