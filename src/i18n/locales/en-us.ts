@@ -10,4 +10,5 @@ export default {
   '切换语言': 'Change Language',
   '多语言': 'Language',
   '应用程序状态': 'App State',
+  '禁止返回上一页': 'Forbid Back Page',
 }

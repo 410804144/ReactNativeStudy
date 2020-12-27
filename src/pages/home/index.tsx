@@ -76,6 +76,13 @@ export default function Home({navigation}:StackScreenProps<any>) {
         url: 'AppStateDemo',
         showArrow: true,
       },
+      {
+        name: 'ForbidBack',
+        title: t('禁止返回上一页'),
+        desc: '',
+        url: 'ForbidBackDemo',
+        showArrow: true,
+      },
     ])
   }
 

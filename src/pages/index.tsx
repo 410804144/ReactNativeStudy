@@ -7,6 +7,7 @@ import ReactModuleDemo from '@/pages/demo/react-module-demo'
 import {useTranslation} from 'react-i18next'
 import Welcome from '@/pages/welcome'
 import AppStateDemo from '@/pages/demo/app-state-demo'
+import ForbidBackDemo from '@/pages/demo/forbid-back-demo'
 
 export default function Pages() {
   const {t} = useTranslation()
@@ -20,6 +21,7 @@ export default function Pages() {
         <Stack.Screen name={'CodePushDemo'} component={CodePushDemo} options={{title: t('热更新')}} />
         <Stack.Screen name={'ReactModuleDemo'} component={ReactModuleDemo} options={{title: t('原生模块')}} />
         <Stack.Screen name={'AppStateDemo'} component={AppStateDemo} options={{title: t('应用程序状态')}} />
+        <Stack.Screen name={'ForbidBackDemo'} component={ForbidBackDemo} options={{title: t('禁止返回上一页')}} />
       </Stack.Navigator>
     </NavigationContainer>
   )
