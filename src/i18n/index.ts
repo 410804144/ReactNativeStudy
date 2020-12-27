@@ -2,6 +2,7 @@ import i18next from 'i18next'
 import {initReactI18next} from 'react-i18next'
 import enUs from './locales/en-us'
 import zhTw from './locales/zh-tw'
+import storage from '@/storage'
 
 export enum LANGUAGE {
   /** 中文 */
@@ -40,28 +41,38 @@ export function getLanguageList(): ILanguage[] {
 
 
 /** 初始化国际化数据 */
-export function initI18n() {
+export async function initI18n() {
+  const defaultLanguage = LANGUAGE.zh_TW
   i18next.use(initReactI18next)
-    .init({
-      resources: {
-        [LANGUAGE.en_US]: {
-          translation: enUs
+      .init({
+        resources: {
+          [LANGUAGE.en_US]: {
+            translation: enUs
+          },
+          [LANGUAGE.zh_TW]: {
+            translation: zhTw
+          },
         },
-        [LANGUAGE.zh_TW]: {
-          translation: zhTw
+        lng: defaultLanguage,
+        fallbackLng: defaultLanguage,
+        interpolation: {
+          escapeValue: false,
         },
-      },
-      lng: LANGUAGE.zh_TW,
-      fallbackLng: LANGUAGE.zh_TW,
-      interpolation: {
-        escapeValue: false,
-      },
+      })
+    .then(() => {
+      // 从缓存中获取设置的语言
+      storage.getItem('language')
+        .then((res) => {
+          if (res) {
+            changeLanguage(res)
+          }
+        })
     })
-    .then()
 }
 
 /** 更改国际化语言 */
 export function changeLanguage(lang: LANGUAGE) {
+  storage.setItem('language', lang).then()
   i18next.changeLanguage(lang).then()
 }
 
